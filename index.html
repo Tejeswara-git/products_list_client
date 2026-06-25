@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Catalog – Browse 200k Products</title>
-  <meta name="description" content="Browse 200,000 products with fast keyset pagination, category filtering, and real-time data consistency." />
+  <meta name="description"
+    content="Browse 200,000 products with fast keyset pagination, category filtering, and real-time data consistency." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ─── Tokens ─────────────────────────────────────────────────── */
     :root {
-      --bg:          #0a0d14;
-      --bg2:         #0f1420;
-      --bg3:         #141926;
-      --surface:     rgba(255,255,255,0.04);
-      --surface-hov: rgba(255,255,255,0.08);
-      --border:      rgba(255,255,255,0.08);
-      --border-hov:  rgba(255,255,255,0.18);
-      --accent:      #6c63ff;
-      --accent2:     #a78bfa;
-      --accent3:     #38bdf8;
-      --text:        #e2e8f0;
-      --text-muted:  #64748b;
-      --text-dim:    #94a3b8;
-      --success:     #22d3a5;
-      --warn:        #f59e0b;
-      --danger:      #f87171;
+      --bg: #0a0d14;
+      --bg2: #0f1420;
+      --bg3: #141926;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-hov: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hov: rgba(255, 255, 255, 0.18);
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --accent3: #38bdf8;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --success: #22d3a5;
+      --warn: #f59e0b;
+      --danger: #f87171;
       --card-radius: 14px;
-      --glow:        0 0 30px rgba(108,99,255,0.15);
+      --glow: 0 0 30px rgba(108, 99, 255, 0.15);
     }
 
     /* ─── Reset ──────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
@@ -47,14 +55,20 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(108,99,255,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(56,189,248,0.08) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(108, 99, 255, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
     /* ─── Layout ─────────────────────────────────────────────────── */
-    .wrapper { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
     /* ─── Header ─────────────────────────────────────────────────── */
     header {
@@ -72,20 +86,35 @@
       align-items: center;
       gap: 12px;
     }
+
     .logo-icon {
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       background: linear-gradient(135deg, var(--accent), var(--accent3));
       border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
-      box-shadow: 0 0 20px rgba(108,99,255,0.4);
+      box-shadow: 0 0 20px rgba(108, 99, 255, 0.4);
     }
-    .logo h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
-    .logo span { color: var(--accent2); }
+
+    .logo h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--accent2);
+    }
 
     .header-meta {
-      display: flex; align-items: center; gap: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
+
     .stat-badge {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -93,18 +122,35 @@
       padding: 6px 14px;
       font-size: 0.78rem;
       color: var(--text-dim);
-      display: flex; align-items: center; gap: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .stat-badge strong { color: var(--accent2); }
+
+    .stat-badge strong {
+      color: var(--accent2);
+    }
+
     .live-dot {
-      width: 7px; height: 7px;
+      width: 7px;
+      height: 7px;
       background: var(--success);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
+
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.8); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
     }
 
     /* ─── Controls bar ───────────────────────────────────────────── */
@@ -143,20 +189,26 @@
       transition: all 0.18s ease;
       white-space: nowrap;
     }
+
     .cat-btn:hover {
       background: var(--surface-hov);
       border-color: var(--border-hov);
       color: var(--text);
     }
+
     .cat-btn.active {
       background: linear-gradient(135deg, var(--accent), #8b5cf6);
       border-color: transparent;
       color: #fff;
-      box-shadow: 0 0 16px rgba(108,99,255,0.4);
+      box-shadow: 0 0 16px rgba(108, 99, 255, 0.4);
     }
 
     /* Right controls */
-    .right-controls { display: flex; align-items: center; gap: 10px; }
+    .right-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
     .limit-select {
       background: var(--bg3);
@@ -170,7 +222,11 @@
       outline: none;
       transition: border-color 0.18s;
     }
-    .limit-select:hover, .limit-select:focus { border-color: var(--accent); }
+
+    .limit-select:hover,
+    .limit-select:focus {
+      border-color: var(--accent);
+    }
 
     .view-toggle {
       display: flex;
@@ -179,6 +235,7 @@
       border-radius: 8px;
       overflow: hidden;
     }
+
     .view-btn {
       background: none;
       border: none;
@@ -188,7 +245,11 @@
       font-size: 14px;
       transition: all 0.15s;
     }
-    .view-btn.active { background: var(--accent); color: #fff; }
+
+    .view-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
 
     /* ─── Result info bar ────────────────────────────────────────── */
     .result-bar {
@@ -201,7 +262,10 @@
       border-top: 1px solid var(--border);
       margin-top: 4px;
     }
-    .result-bar strong { color: var(--text-dim); }
+
+    .result-bar strong {
+      color: var(--text-dim);
+    }
 
     /* ─── Grid ───────────────────────────────────────────────────── */
     .grid {
@@ -210,6 +274,7 @@
       gap: 16px;
       padding: 20px 0;
     }
+
     .grid.list-view {
       grid-template-columns: 1fr;
       gap: 10px;
@@ -226,20 +291,25 @@
       position: relative;
       overflow: hidden;
     }
+
     .card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(108,99,255,0.04), transparent);
+      background: linear-gradient(135deg, rgba(108, 99, 255, 0.04), transparent);
       opacity: 0;
       transition: opacity 0.22s;
     }
+
     .card:hover {
       border-color: var(--border-hov);
       transform: translateY(-2px);
       box-shadow: var(--glow);
     }
-    .card:hover::before { opacity: 1; }
+
+    .card:hover::before {
+      opacity: 1;
+    }
 
     /* List view card */
     .list-view .card {
@@ -249,8 +319,16 @@
       padding: 16px 20px;
       gap: 16px;
     }
-    .list-view .card-body { display: flex; align-items: center; gap: 16px; }
-    .list-view .card-dates { display: none; }
+
+    .list-view .card-body {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .list-view .card-dates {
+      display: none;
+    }
 
     .card-top {
       display: flex;
@@ -258,6 +336,7 @@
       justify-content: space-between;
       margin-bottom: 12px;
     }
+
     .card-cat {
       font-size: 0.72rem;
       font-weight: 600;
@@ -267,17 +346,20 @@
       border-radius: 999px;
       border: 1px solid;
     }
+
     .card-id {
       font-size: 0.72rem;
       color: var(--text-muted);
       font-family: 'SF Mono', 'Fira Code', monospace;
     }
+
     .card-name {
       font-size: 0.97rem;
       font-weight: 600;
       margin-bottom: 6px;
       line-height: 1.35;
     }
+
     .card-price {
       font-size: 1.4rem;
       font-weight: 700;
@@ -287,7 +369,11 @@
       background-clip: text;
       margin: 10px 0 0;
     }
-    .list-view .card-price { font-size: 1.1rem; margin: 0; }
+
+    .list-view .card-price {
+      font-size: 1.1rem;
+      margin: 0;
+    }
 
     .card-dates {
       margin-top: 14px;
@@ -297,24 +383,73 @@
       flex-direction: column;
       gap: 4px;
     }
+
     .date-row {
       display: flex;
       justify-content: space-between;
       font-size: 0.72rem;
       color: var(--text-muted);
     }
-    .date-row span:last-child { color: var(--text-dim); font-family: monospace; }
+
+    .date-row span:last-child {
+      color: var(--text-dim);
+      font-family: monospace;
+    }
 
     /* Category colours */
-    .cat-electronics { color: #38bdf8; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.08); }
-    .cat-clothing     { color: #f472b6; border-color: rgba(244,114,182,0.3); background: rgba(244,114,182,0.08); }
-    .cat-books        { color: #fb923c; border-color: rgba(251,146,60,0.3);  background: rgba(251,146,60,0.08);  }
-    .cat-home         { color: #4ade80; border-color: rgba(74,222,128,0.3);  background: rgba(74,222,128,0.08);  }
-    .cat-sports       { color: #facc15; border-color: rgba(250,204,21,0.3);  background: rgba(250,204,21,0.08);  }
-    .cat-toys         { color: #c084fc; border-color: rgba(192,132,252,0.3); background: rgba(192,132,252,0.08); }
-    .cat-food         { color: #22d3ee; border-color: rgba(34,211,238,0.3);  background: rgba(34,211,238,0.08);  }
-    .cat-beauty       { color: #f87171; border-color: rgba(248,113,113,0.3); background: rgba(248,113,113,0.08); }
-    .cat-default      { color: var(--accent2); border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
+    .cat-electronics {
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .cat-clothing {
+      color: #f472b6;
+      border-color: rgba(244, 114, 182, 0.3);
+      background: rgba(244, 114, 182, 0.08);
+    }
+
+    .cat-books {
+      color: #fb923c;
+      border-color: rgba(251, 146, 60, 0.3);
+      background: rgba(251, 146, 60, 0.08);
+    }
+
+    .cat-home {
+      color: #4ade80;
+      border-color: rgba(74, 222, 128, 0.3);
+      background: rgba(74, 222, 128, 0.08);
+    }
+
+    .cat-sports {
+      color: #facc15;
+      border-color: rgba(250, 204, 21, 0.3);
+      background: rgba(250, 204, 21, 0.08);
+    }
+
+    .cat-toys {
+      color: #c084fc;
+      border-color: rgba(192, 132, 252, 0.3);
+      background: rgba(192, 132, 252, 0.08);
+    }
+
+    .cat-food {
+      color: #22d3ee;
+      border-color: rgba(34, 211, 238, 0.3);
+      background: rgba(34, 211, 238, 0.08);
+    }
+
+    .cat-beauty {
+      color: #f87171;
+      border-color: rgba(248, 113, 113, 0.3);
+      background: rgba(248, 113, 113, 0.08);
+    }
+
+    .cat-default {
+      color: var(--accent2);
+      border-color: rgba(167, 139, 250, 0.3);
+      background: rgba(167, 139, 250, 0.08);
+    }
 
     /* ─── Skeleton loader ────────────────────────────────────────── */
     .skeleton {
@@ -323,21 +458,46 @@
       animation: shimmer 1.4s infinite;
       border-radius: 6px;
     }
+
     @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
     }
+
     .card-skeleton {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--card-radius);
       padding: 20px;
     }
-    .sk-line { height: 12px; margin-bottom: 10px; }
-    .sk-w60 { width: 60%; }
-    .sk-w40 { width: 40%; }
-    .sk-w80 { width: 80%; }
-    .sk-price { height: 28px; width: 35%; margin-top: 14px; }
+
+    .sk-line {
+      height: 12px;
+      margin-bottom: 10px;
+    }
+
+    .sk-w60 {
+      width: 60%;
+    }
+
+    .sk-w40 {
+      width: 40%;
+    }
+
+    .sk-w80 {
+      width: 80%;
+    }
+
+    .sk-price {
+      height: 28px;
+      width: 35%;
+      margin-top: 14px;
+    }
 
     /* ─── Pagination ─────────────────────────────────────────────── */
     .pagination {
@@ -361,26 +521,35 @@
       border: none;
       transition: all 0.18s ease;
     }
+
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), #8b5cf6);
       color: #fff;
-      box-shadow: 0 4px 16px rgba(108,99,255,0.35);
+      box-shadow: 0 4px 16px rgba(108, 99, 255, 0.35);
     }
+
     .btn-primary:hover:not(:disabled) {
-      box-shadow: 0 4px 24px rgba(108,99,255,0.55);
+      box-shadow: 0 4px 24px rgba(108, 99, 255, 0.55);
       transform: translateY(-1px);
     }
+
     .btn-ghost {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-dim);
     }
+
     .btn-ghost:hover:not(:disabled) {
       background: var(--surface-hov);
       border-color: var(--border-hov);
       color: var(--text);
     }
-    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none !important;
+    }
 
     .page-info {
       font-size: 0.82rem;
@@ -395,13 +564,22 @@
       padding: 80px 20px;
       color: var(--text-muted);
     }
-    .empty-icon { font-size: 3rem; margin-bottom: 16px; }
-    .empty h2 { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 8px; }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .empty h2 {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
 
     /* ─── Error banner ───────────────────────────────────────────── */
     .error-banner {
-      background: rgba(248,113,113,0.1);
-      border: 1px solid rgba(248,113,113,0.3);
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
       border-radius: 10px;
       padding: 14px 18px;
       color: var(--danger);
@@ -411,13 +589,16 @@
       align-items: center;
       gap: 10px;
     }
-    .error-banner.hidden { display: none; }
+
+    .error-banner.hidden {
+      display: none;
+    }
 
     /* ─── Detail modal ───────────────────────────────────────────── */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(6px);
       z-index: 100;
       display: flex;
@@ -428,7 +609,11 @@
       pointer-events: none;
       transition: opacity 0.22s;
     }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
 
     .modal {
       background: var(--bg2);
@@ -437,11 +622,14 @@
       padding: 32px;
       width: 100%;
       max-width: 460px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5), var(--glow);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), var(--glow);
       transform: translateY(12px) scale(0.97);
       transition: transform 0.22s ease;
     }
-    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0) scale(1);
+    }
 
     .modal-header {
       display: flex;
@@ -449,19 +637,31 @@
       justify-content: space-between;
       margin-bottom: 24px;
     }
-    .modal-title { font-size: 1.1rem; font-weight: 700; }
+
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
     .modal-close {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-dim);
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       font-size: 16px;
       transition: all 0.15s;
     }
-    .modal-close:hover { background: var(--surface-hov); color: var(--text); }
+
+    .modal-close:hover {
+      background: var(--surface-hov);
+      color: var(--text);
+    }
 
     .modal-field {
       display: flex;
@@ -471,10 +671,33 @@
       border-bottom: 1px solid var(--border);
       font-size: 0.88rem;
     }
-    .modal-field:last-child { border-bottom: none; }
-    .modal-label { color: var(--text-muted); font-weight: 500; }
-    .modal-value { color: var(--text); font-weight: 500; text-align: right; max-width: 60%; word-break: break-all; }
-    .modal-price { font-size: 2rem; font-weight: 800; background: linear-gradient(90deg, var(--accent2), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 16px 0; }
+
+    .modal-field:last-child {
+      border-bottom: none;
+    }
+
+    .modal-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .modal-value {
+      color: var(--text);
+      font-weight: 500;
+      text-align: right;
+      max-width: 60%;
+      word-break: break-all;
+    }
+
+    .modal-price {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent2), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 16px 0;
+    }
 
     /* ─── Toast ──────────────────────────────────────────────────── */
     .toast {
@@ -487,188 +710,202 @@
       padding: 12px 20px;
       font-size: 0.85rem;
       color: var(--text);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       z-index: 200;
       transform: translateY(80px);
       opacity: 0;
-      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .toast.show { transform: translateY(0); opacity: 1; }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
 
     /* ─── Responsive ─────────────────────────────────────────────── */
     @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; }
-      .header-meta .stat-badge:first-child { display: none; }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-meta .stat-badge:first-child {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ── Header ──────────────────────────────────────────────────────── -->
-<div class="wrapper">
-  <header>
-    <div class="logo">
-      <div class="logo-icon">🛍️</div>
-      <h1>Product<span>Catalog</span></h1>
-    </div>
-    <div class="header-meta">
-      <div class="stat-badge">
-        <div class="live-dot"></div>
-        <span>Live data &nbsp;·&nbsp; <strong id="total-count">—</strong> products</span>
+  <!-- ── Header ──────────────────────────────────────────────────────── -->
+  <div class="wrapper">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">🛍️</div>
+        <h1>Product<span>Catalog</span></h1>
       </div>
-      <div class="stat-badge">🗄️ PostgreSQL &nbsp;·&nbsp; Keyset Pagination</div>
-    </div>
-  </header>
-
-  <!-- ── Controls ──────────────────────────────────────────────────── -->
-  <section class="controls" aria-label="Filters and settings">
-    <div class="controls-row">
-      <!-- Category pills -->
-      <div class="cat-scroll" id="cat-bar" role="group" aria-label="Category filter">
-        <button class="cat-btn active" id="cat-all" data-cat="" onclick="selectCategory('')">All</button>
+      <div class="header-meta">
+        <div class="stat-badge">
+          <div class="live-dot"></div>
+          <span>Live data &nbsp;·&nbsp; <strong id="total-count">—</strong> products</span>
+        </div>
+        <div class="stat-badge">🗄️ PostgreSQL &nbsp;·&nbsp; Keyset Pagination</div>
       </div>
+    </header>
 
-      <!-- Right controls -->
-      <div class="right-controls">
-        <label for="limit-select" style="font-size:0.82rem;color:var(--text-muted)">Per page</label>
-        <select class="limit-select" id="limit-select" onchange="changeLimit(this.value)">
-          <option value="10">10</option>
-          <option value="20" selected>20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-
-        <div class="view-toggle" role="group" aria-label="View mode">
-          <button class="view-btn active" id="grid-btn" title="Grid view" onclick="setView('grid')" aria-pressed="true">⊞</button>
-          <button class="view-btn" id="list-btn" title="List view" onclick="setView('list')" aria-pressed="false">☰</button>
+    <!-- ── Controls ──────────────────────────────────────────────────── -->
+    <section class="controls" aria-label="Filters and settings">
+      <div class="controls-row">
+        <!-- Category pills -->
+        <div class="cat-scroll" id="cat-bar" role="group" aria-label="Category filter">
+          <button class="cat-btn active" id="cat-all" data-cat="" onclick="selectCategory('')">All</button>
         </div>
 
-        <button class="btn btn-primary" id="refresh-btn" onclick="refreshData()" title="Refresh data">
-          ↻ Refresh
-        </button>
+        <!-- Right controls -->
+        <div class="right-controls">
+          <label for="limit-select" style="font-size:0.82rem;color:var(--text-muted)">Per page</label>
+          <select class="limit-select" id="limit-select" onchange="changeLimit(this.value)">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+
+          <div class="view-toggle" role="group" aria-label="View mode">
+            <button class="view-btn active" id="grid-btn" title="Grid view" onclick="setView('grid')"
+              aria-pressed="true">⊞</button>
+            <button class="view-btn" id="list-btn" title="List view" onclick="setView('list')"
+              aria-pressed="false">☰</button>
+          </div>
+
+          <button class="btn btn-primary" id="refresh-btn" onclick="refreshData()" title="Refresh data">
+            ↻ Refresh
+          </button>
+        </div>
       </div>
+
+      <!-- Result bar -->
+      <div class="result-bar">
+        <span id="result-info">Loading…</span>
+        <span id="cursor-info" style="font-family:monospace;font-size:0.75rem;color:var(--text-muted)"></span>
+      </div>
+    </section>
+
+    <!-- ── Error banner ───────────────────────────────────────────────── -->
+    <div class="error-banner hidden" id="error-banner" role="alert">
+      ⚠️ <span id="error-msg">Could not reach the API.</span>
+      <button class="btn btn-ghost" style="margin-left:auto;padding:6px 14px;font-size:0.8rem"
+        onclick="fetchPage()">Retry</button>
     </div>
 
-    <!-- Result bar -->
-    <div class="result-bar">
-      <span id="result-info">Loading…</span>
-      <span id="cursor-info" style="font-family:monospace;font-size:0.75rem;color:var(--text-muted)"></span>
-    </div>
-  </section>
+    <!-- ── Product grid ───────────────────────────────────────────────── -->
+    <main id="grid" class="grid" aria-label="Products"></main>
 
-  <!-- ── Error banner ───────────────────────────────────────────────── -->
-  <div class="error-banner hidden" id="error-banner" role="alert">
-    ⚠️ <span id="error-msg">Could not reach the API.</span>
-    <button class="btn btn-ghost" style="margin-left:auto;padding:6px 14px;font-size:0.8rem" onclick="fetchPage()">Retry</button>
+    <!-- ── Pagination ─────────────────────────────────────────────────── -->
+    <nav class="pagination" aria-label="Pagination">
+      <button class="btn btn-ghost" id="first-btn" onclick="goFirst()" disabled>⇤ First</button>
+      <button class="btn btn-ghost" id="prev-btn" onclick="goPrev()" disabled>← Prev</button>
+      <span class="page-info" id="page-info">Page 1</span>
+      <button class="btn btn-primary" id="next-btn" onclick="goNext()" disabled>Next →</button>
+    </nav>
   </div>
 
-  <!-- ── Product grid ───────────────────────────────────────────────── -->
-  <main id="grid" class="grid" aria-label="Products"></main>
-
-  <!-- ── Pagination ─────────────────────────────────────────────────── -->
-  <nav class="pagination" aria-label="Pagination">
-    <button class="btn btn-ghost" id="first-btn" onclick="goFirst()" disabled>⇤ First</button>
-    <button class="btn btn-ghost" id="prev-btn"  onclick="goPrev()"  disabled>← Prev</button>
-    <span class="page-info" id="page-info">Page 1</span>
-    <button class="btn btn-primary" id="next-btn" onclick="goNext()" disabled>Next →</button>
-  </nav>
-</div>
-
-<!-- ── Detail modal ──────────────────────────────────────────────────── -->
-<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="closeModalOnOverlay(event)">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title" id="modal-title">Product Detail</span>
-      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+  <!-- ── Detail modal ──────────────────────────────────────────────────── -->
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+    onclick="closeModalOnOverlay(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">Product Detail</span>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      </div>
+      <div id="modal-body"></div>
     </div>
-    <div id="modal-body"></div>
   </div>
-</div>
 
-<!-- ── Toast ──────────────────────────────────────────────────────────── -->
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- ── Toast ──────────────────────────────────────────────────────────── -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script>
-/* ────────────────────────────────────────────────────────────────────
-   Configuration
-──────────────────────────────────────────────────────────────────── */
-const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
-  ? 'http://localhost:3000/api'
-  : 'https://products-list-5fld.onrender.com/api';
+  <script>
+    /* ────────────────────────────────────────────────────────────────────
+       Configuration
+    ──────────────────────────────────────────────────────────────────── */
+    const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
+      ? 'http://localhost:3000/api'
+      : 'https://products-list-5fld.onrender.com';
 
-/* ────────────────────────────────────────────────────────────────────
-   State
-──────────────────────────────────────────────────────────────────── */
-let state = {
-  category:   '',
-  limit:      20,
-  page:       1,
-  view:       'grid',
-  // Cursor stack: each entry is { created_at, id } of the FIRST item on that page
-  // (we store the cursor used to GET page N so we can go back)
-  cursorStack: [],   // index 0 = cursor for page 1 (null), index 1 = cursor for page 2, etc.
-  currentCursor: null,  // cursor passed in the current request
-  nextCursor:    null,  // cursor returned by the API (go to next page)
-  loading:    false,
-  totalShown: 0,
-};
+    /* ────────────────────────────────────────────────────────────────────
+       State
+    ──────────────────────────────────────────────────────────────────── */
+    let state = {
+      category: '',
+      limit: 20,
+      page: 1,
+      view: 'grid',
+      // Cursor stack: each entry is { created_at, id } of the FIRST item on that page
+      // (we store the cursor used to GET page N so we can go back)
+      cursorStack: [],   // index 0 = cursor for page 1 (null), index 1 = cursor for page 2, etc.
+      currentCursor: null,  // cursor passed in the current request
+      nextCursor: null,  // cursor returned by the API (go to next page)
+      loading: false,
+      totalShown: 0,
+    };
 
-/* ────────────────────────────────────────────────────────────────────
-   Category colour map
-──────────────────────────────────────────────────────────────────── */
-const catClass = name => {
-  if (!name) return 'cat-default';
-  const key = name.toLowerCase().split(/\s|&/)[0];
-  const map = {
-    electronics: 'cat-electronics',
-    clothing:    'cat-clothing',
-    books:       'cat-books',
-    home:        'cat-home',
-    sports:      'cat-sports',
-    toys:        'cat-toys',
-    food:        'cat-food',
-    beauty:      'cat-beauty',
-  };
-  return map[key] || 'cat-default';
-};
+    /* ────────────────────────────────────────────────────────────────────
+       Category colour map
+    ──────────────────────────────────────────────────────────────────── */
+    const catClass = name => {
+      if (!name) return 'cat-default';
+      const key = name.toLowerCase().split(/\s|&/)[0];
+      const map = {
+        electronics: 'cat-electronics',
+        clothing: 'cat-clothing',
+        books: 'cat-books',
+        home: 'cat-home',
+        sports: 'cat-sports',
+        toys: 'cat-toys',
+        food: 'cat-food',
+        beauty: 'cat-beauty',
+      };
+      return map[key] || 'cat-default';
+    };
 
-/* ────────────────────────────────────────────────────────────────────
-   Utilities
-──────────────────────────────────────────────────────────────────── */
-const fmt = {
-  price: v => '$' + parseFloat(v).toFixed(2),
-  date:  v => {
-    const d = new Date(v);
-    return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
-  },
-  dateTime: v => {
-    const d = new Date(v);
-    return d.toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
-  },
-};
+    /* ────────────────────────────────────────────────────────────────────
+       Utilities
+    ──────────────────────────────────────────────────────────────────── */
+    const fmt = {
+      price: v => '$' + parseFloat(v).toFixed(2),
+      date: v => {
+        const d = new Date(v);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      },
+      dateTime: v => {
+        const d = new Date(v);
+        return d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      },
+    };
 
-function showToast(msg, dur = 2500) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), dur);
-}
+    function showToast(msg, dur = 2500) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), dur);
+    }
 
-function showError(msg) {
-  const banner = document.getElementById('error-banner');
-  document.getElementById('error-msg').textContent = msg;
-  banner.classList.remove('hidden');
-}
-function hideError() {
-  document.getElementById('error-banner').classList.add('hidden');
-}
+    function showError(msg) {
+      const banner = document.getElementById('error-banner');
+      document.getElementById('error-msg').textContent = msg;
+      banner.classList.remove('hidden');
+    }
+    function hideError() {
+      document.getElementById('error-banner').classList.add('hidden');
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Skeleton loader
-──────────────────────────────────────────────────────────────────── */
-function renderSkeletons(n = 8) {
-  const grid = document.getElementById('grid');
-  grid.innerHTML = Array.from({ length: n }).map(() => `
+    /* ────────────────────────────────────────────────────────────────────
+       Skeleton loader
+    ──────────────────────────────────────────────────────────────────── */
+    function renderSkeletons(n = 8) {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = Array.from({ length: n }).map(() => `
     <div class="card-skeleton">
       <div class="skeleton sk-line sk-w40" style="height:18px;margin-bottom:14px"></div>
       <div class="skeleton sk-line sk-w80"></div>
@@ -680,27 +917,27 @@ function renderSkeletons(n = 8) {
       </div>
     </div>
   `).join('');
-}
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Render products
-──────────────────────────────────────────────────────────────────── */
-function renderProducts(products) {
-  const grid = document.getElementById('grid');
-  if (products.length === 0) {
-    grid.innerHTML = `
+    /* ────────────────────────────────────────────────────────────────────
+       Render products
+    ──────────────────────────────────────────────────────────────────── */
+    function renderProducts(products) {
+      const grid = document.getElementById('grid');
+      if (products.length === 0) {
+        grid.innerHTML = `
       <div class="empty" style="grid-column:1/-1">
         <div class="empty-icon">📭</div>
         <h2>No products found</h2>
         <p>Try a different category or refresh.</p>
       </div>`;
-    return;
-  }
+        return;
+      }
 
-  grid.innerHTML = products.map(p => {
-    const cc = catClass(p.category);
-    if (state.view === 'list') {
-      return `
+      grid.innerHTML = products.map(p => {
+        const cc = catClass(p.category);
+        if (state.view === 'list') {
+          return `
         <div class="card" onclick="openModal(${p.id})" tabindex="0" role="button"
              aria-label="View ${p.name}">
           <div class="card-body">
@@ -710,8 +947,8 @@ function renderProducts(products) {
           </div>
           <div class="card-price">${fmt.price(p.price)}</div>
         </div>`;
-    }
-    return `
+        }
+        return `
       <div class="card" onclick="openModal(${p.id})" tabindex="0" role="button"
            aria-label="View ${p.name}, ${fmt.price(p.price)}">
         <div class="card-top">
@@ -725,213 +962,213 @@ function renderProducts(products) {
           <div class="date-row"><span>Updated</span><span>${fmt.date(p.updated_at)}</span></div>
         </div>
       </div>`;
-  }).join('');
+      }).join('');
 
-  // Allow keyboard navigation
-  grid.querySelectorAll('[role=button]').forEach(el => {
-    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') el.click(); });
-  });
-}
+      // Allow keyboard navigation
+      grid.querySelectorAll('[role=button]').forEach(el => {
+        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') el.click(); });
+      });
+    }
 
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+    function escHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Fetch page
-──────────────────────────────────────────────────────────────────── */
-async function fetchPage(cursor = null) {
-  if (state.loading) return;
-  state.loading = true;
-  hideError();
-  renderSkeletons(state.limit > 20 ? 12 : 8);
-  updatePaginationButtons(true);
+    /* ────────────────────────────────────────────────────────────────────
+       Fetch page
+    ──────────────────────────────────────────────────────────────────── */
+    async function fetchPage(cursor = null) {
+      if (state.loading) return;
+      state.loading = true;
+      hideError();
+      renderSkeletons(state.limit > 20 ? 12 : 8);
+      updatePaginationButtons(true);
 
-  const params = new URLSearchParams({ limit: state.limit });
-  if (state.category) params.set('category', state.category);
-  if (cursor?.created_at) {
-    params.set('cursor_created_at', cursor.created_at);
-    params.set('cursor_id', cursor.id);
-  }
+      const params = new URLSearchParams({ limit: state.limit });
+      if (state.category) params.set('category', state.category);
+      if (cursor?.created_at) {
+        params.set('cursor_created_at', cursor.created_at);
+        params.set('cursor_id', cursor.id);
+      }
 
-  // Show cursor in debug bar
-  const cursorEl = document.getElementById('cursor-info');
-  cursorEl.textContent = cursor ? `cursor id=${cursor.id}` : 'first page';
+      // Show cursor in debug bar
+      const cursorEl = document.getElementById('cursor-info');
+      cursorEl.textContent = cursor ? `cursor id=${cursor.id}` : 'first page';
 
-  try {
-    const res  = await fetch(`${API}/products?${params}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-    const json = await res.json();
+      try {
+        const res = await fetch(`${API}/products?${params}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+        const json = await res.json();
 
-    state.nextCursor = json.next_cursor;
-    state.totalShown = json.data.length;
+        state.nextCursor = json.next_cursor;
+        state.totalShown = json.data.length;
 
-    renderProducts(json.data);
-    updateResultBar(json.data.length, json.next_cursor);
-    updatePaginationButtons(false);
+        renderProducts(json.data);
+        updateResultBar(json.data.length, json.next_cursor);
+        updatePaginationButtons(false);
 
-    // Scroll to top of grid smoothly
-    document.getElementById('grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } catch (err) {
-    renderSkeletons(0);
-    document.getElementById('grid').innerHTML = '';
-    showError(`API error: ${err.message}. Check the Render backend at products-list-5fld.onrender.com`);
-  } finally {
-    state.loading = false;
-  }
-}
+        // Scroll to top of grid smoothly
+        document.getElementById('grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err) {
+        renderSkeletons(0);
+        document.getElementById('grid').innerHTML = '';
+        showError(`API error: ${err.message}. Check the Render backend at products-list-5fld.onrender.com`);
+      } finally {
+        state.loading = false;
+      }
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Result bar
-──────────────────────────────────────────────────────────────────── */
-function updateResultBar(count, nextCursor) {
-  const info = document.getElementById('result-info');
-  const catLabel = state.category ? ` in <strong>${state.category}</strong>` : '';
-  info.innerHTML = `Showing <strong>${count}</strong> product${count!==1?'s':''}${catLabel} &nbsp;·&nbsp; Page <strong>${state.page}</strong>` +
-    (nextCursor ? '' : ' &nbsp;·&nbsp; <span style="color:var(--success)">Last page</span>');
-}
+    /* ────────────────────────────────────────────────────────────────────
+       Result bar
+    ──────────────────────────────────────────────────────────────────── */
+    function updateResultBar(count, nextCursor) {
+      const info = document.getElementById('result-info');
+      const catLabel = state.category ? ` in <strong>${state.category}</strong>` : '';
+      info.innerHTML = `Showing <strong>${count}</strong> product${count !== 1 ? 's' : ''}${catLabel} &nbsp;·&nbsp; Page <strong>${state.page}</strong>` +
+        (nextCursor ? '' : ' &nbsp;·&nbsp; <span style="color:var(--success)">Last page</span>');
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Pagination controls
-──────────────────────────────────────────────────────────────────── */
-function updatePaginationButtons(loading) {
-  const firstBtn = document.getElementById('first-btn');
-  const prevBtn  = document.getElementById('prev-btn');
-  const nextBtn  = document.getElementById('next-btn');
-  const pageInfo = document.getElementById('page-info');
+    /* ────────────────────────────────────────────────────────────────────
+       Pagination controls
+    ──────────────────────────────────────────────────────────────────── */
+    function updatePaginationButtons(loading) {
+      const firstBtn = document.getElementById('first-btn');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const pageInfo = document.getElementById('page-info');
 
-  pageInfo.textContent = `Page ${state.page}`;
+      pageInfo.textContent = `Page ${state.page}`;
 
-  if (loading) {
-    firstBtn.disabled = true;
-    prevBtn.disabled  = true;
-    nextBtn.disabled  = true;
-    nextBtn.textContent = '⏳ Loading…';
-    return;
-  }
+      if (loading) {
+        firstBtn.disabled = true;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+        nextBtn.textContent = '⏳ Loading…';
+        return;
+      }
 
-  firstBtn.disabled = state.page <= 1;
-  prevBtn.disabled  = state.page <= 1;
-  nextBtn.disabled  = !state.nextCursor;
-  nextBtn.textContent = 'Next →';
-}
+      firstBtn.disabled = state.page <= 1;
+      prevBtn.disabled = state.page <= 1;
+      nextBtn.disabled = !state.nextCursor;
+      nextBtn.textContent = 'Next →';
+    }
 
-function goNext() {
-  if (!state.nextCursor) return;
-  // Push the cursor that got us to the CURRENT page onto the stack
-  state.cursorStack.push(state.currentCursor);
-  state.currentCursor = state.nextCursor;
-  state.page++;
-  fetchPage(state.currentCursor);
-}
+    function goNext() {
+      if (!state.nextCursor) return;
+      // Push the cursor that got us to the CURRENT page onto the stack
+      state.cursorStack.push(state.currentCursor);
+      state.currentCursor = state.nextCursor;
+      state.page++;
+      fetchPage(state.currentCursor);
+    }
 
-function goPrev() {
-  if (state.cursorStack.length === 0) return;
-  state.currentCursor = state.cursorStack.pop();
-  state.page--;
-  fetchPage(state.currentCursor);
-}
+    function goPrev() {
+      if (state.cursorStack.length === 0) return;
+      state.currentCursor = state.cursorStack.pop();
+      state.page--;
+      fetchPage(state.currentCursor);
+    }
 
-function goFirst() {
-  state.cursorStack    = [];
-  state.currentCursor  = null;
-  state.nextCursor     = null;
-  state.page           = 1;
-  fetchPage(null);
-}
+    function goFirst() {
+      state.cursorStack = [];
+      state.currentCursor = null;
+      state.nextCursor = null;
+      state.page = 1;
+      fetchPage(null);
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Category filter
-──────────────────────────────────────────────────────────────────── */
-async function loadCategories() {
-  try {
-    const res  = await fetch(`${API}/products/categories`);
-    const json = await res.json();
-    const bar  = document.getElementById('cat-bar');
+    /* ────────────────────────────────────────────────────────────────────
+       Category filter
+    ──────────────────────────────────────────────────────────────────── */
+    async function loadCategories() {
+      try {
+        const res = await fetch(`${API}/products/categories`);
+        const json = await res.json();
+        const bar = document.getElementById('cat-bar');
 
-    // Update total count badge
-    document.getElementById('total-count').textContent =
-      '~' + (200000).toLocaleString();
+        // Update total count badge
+        document.getElementById('total-count').textContent =
+          '~' + (200000).toLocaleString();
 
-    json.categories.forEach(cat => {
-      const btn = document.createElement('button');
-      btn.className = 'cat-btn';
-      btn.dataset.cat = cat;
-      btn.id = `cat-${cat.replace(/\W+/g,'-').toLowerCase()}`;
-      btn.textContent = cat;
-      btn.onclick = () => selectCategory(cat);
-      bar.appendChild(btn);
-    });
-  } catch {
-    // Non-critical — categories just won't show
-  }
-}
+        json.categories.forEach(cat => {
+          const btn = document.createElement('button');
+          btn.className = 'cat-btn';
+          btn.dataset.cat = cat;
+          btn.id = `cat-${cat.replace(/\W+/g, '-').toLowerCase()}`;
+          btn.textContent = cat;
+          btn.onclick = () => selectCategory(cat);
+          bar.appendChild(btn);
+        });
+      } catch {
+        // Non-critical — categories just won't show
+      }
+    }
 
-function selectCategory(cat) {
-  state.category      = cat;
-  state.cursorStack   = [];
-  state.currentCursor = null;
-  state.nextCursor    = null;
-  state.page          = 1;
+    function selectCategory(cat) {
+      state.category = cat;
+      state.cursorStack = [];
+      state.currentCursor = null;
+      state.nextCursor = null;
+      state.page = 1;
 
-  // Update active pill
-  document.querySelectorAll('.cat-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.cat === cat);
-  });
+      // Update active pill
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.cat === cat);
+      });
 
-  fetchPage(null);
-}
+      fetchPage(null);
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Controls
-──────────────────────────────────────────────────────────────────── */
-function changeLimit(val) {
-  state.limit         = Number(val);
-  state.cursorStack   = [];
-  state.currentCursor = null;
-  state.nextCursor    = null;
-  state.page          = 1;
-  fetchPage(null);
-}
+    /* ────────────────────────────────────────────────────────────────────
+       Controls
+    ──────────────────────────────────────────────────────────────────── */
+    function changeLimit(val) {
+      state.limit = Number(val);
+      state.cursorStack = [];
+      state.currentCursor = null;
+      state.nextCursor = null;
+      state.page = 1;
+      fetchPage(null);
+    }
 
-function setView(mode) {
-  state.view = mode;
-  const grid = document.getElementById('grid');
-  grid.classList.toggle('list-view', mode === 'list');
-  document.getElementById('grid-btn').classList.toggle('active', mode === 'grid');
-  document.getElementById('list-btn').classList.toggle('active', mode === 'list');
-  document.getElementById('grid-btn').setAttribute('aria-pressed', mode === 'grid');
-  document.getElementById('list-btn').setAttribute('aria-pressed', mode === 'list');
+    function setView(mode) {
+      state.view = mode;
+      const grid = document.getElementById('grid');
+      grid.classList.toggle('list-view', mode === 'list');
+      document.getElementById('grid-btn').classList.toggle('active', mode === 'grid');
+      document.getElementById('list-btn').classList.toggle('active', mode === 'list');
+      document.getElementById('grid-btn').setAttribute('aria-pressed', mode === 'grid');
+      document.getElementById('list-btn').setAttribute('aria-pressed', mode === 'list');
 
-  // Re-render current data without a new fetch
-  const cards = grid.querySelectorAll('.card');
-  if (cards.length > 0) fetchPage(state.currentCursor);
-}
+      // Re-render current data without a new fetch
+      const cards = grid.querySelectorAll('.card');
+      if (cards.length > 0) fetchPage(state.currentCursor);
+    }
 
-function refreshData() {
-  goFirst();
-  showToast('↻ Refreshed');
-}
+    function refreshData() {
+      goFirst();
+      showToast('↻ Refreshed');
+    }
 
-/* ────────────────────────────────────────────────────────────────────
-   Product detail modal
-──────────────────────────────────────────────────────────────────── */
-async function openModal(id) {
-  const overlay = document.getElementById('modal');
-  const body    = document.getElementById('modal-body');
-  const title   = document.getElementById('modal-title');
+    /* ────────────────────────────────────────────────────────────────────
+       Product detail modal
+    ──────────────────────────────────────────────────────────────────── */
+    async function openModal(id) {
+      const overlay = document.getElementById('modal');
+      const body = document.getElementById('modal-body');
+      const title = document.getElementById('modal-title');
 
-  overlay.classList.add('open');
-  body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-muted)">Loading…</div>`;
+      overlay.classList.add('open');
+      body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-muted)">Loading…</div>`;
 
-  try {
-    const res  = await fetch(`${API}/products/${id}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const { data: p } = await res.json();
-    const cc = catClass(p.category);
+      try {
+        const res = await fetch(`${API}/products/${id}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const { data: p } = await res.json();
+        const cc = catClass(p.category);
 
-    title.textContent = p.name;
-    body.innerHTML = `
+        title.textContent = p.name;
+        body.innerHTML = `
       <div class="modal-price">${fmt.price(p.price)}</div>
       <div class="modal-field">
         <span class="modal-label">Category</span>
@@ -953,31 +1190,32 @@ async function openModal(id) {
         <button class="btn btn-ghost" style="flex:1" onclick="closeModal()">Close</button>
         <button class="btn btn-primary" style="flex:1" onclick="copyId(${p.id})">Copy ID</button>
       </div>`;
-  } catch (err) {
-    body.innerHTML = `<div style="color:var(--danger);padding:20px">Failed to load: ${err.message}</div>`;
-  }
-}
+      } catch (err) {
+        body.innerHTML = `<div style="color:var(--danger);padding:20px">Failed to load: ${err.message}</div>`;
+      }
+    }
 
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-}
-function closeModalOnOverlay(e) {
-  if (e.target === document.getElementById('modal')) closeModal();
-}
-function copyId(id) {
-  navigator.clipboard.writeText(String(id)).then(() => showToast(`Copied ID #${id}`));
-}
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+    }
+    function closeModalOnOverlay(e) {
+      if (e.target === document.getElementById('modal')) closeModal();
+    }
+    function copyId(id) {
+      navigator.clipboard.writeText(String(id)).then(() => showToast(`Copied ID #${id}`));
+    }
 
-// Close modal on Escape
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    // Close modal on Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* ────────────────────────────────────────────────────────────────────
-   Boot
-──────────────────────────────────────────────────────────────────── */
-(async () => {
-  await loadCategories();
-  fetchPage(null);
-})();
-</script>
+    /* ────────────────────────────────────────────────────────────────────
+       Boot
+    ──────────────────────────────────────────────────────────────────── */
+    (async () => {
+      await loadCategories();
+      fetchPage(null);
+    })();
+  </script>
 </body>
+
 </html>
